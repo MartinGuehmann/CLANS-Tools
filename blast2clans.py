@@ -41,14 +41,17 @@ inputFileName = sys.argv[1]
 outputFileName = sys.argv[2]
 
 f = open(inputFileName, 'rt')
-reader = csv.reader(f, delimiter='\t')
 names2Index = {}
 count = 0
 print("Create list of sequence names with indeces.")
-for row in reader:
+
+line = f.readline()
+while line:
+	row = line.split()
 	if row[0] not in names2Index:
 		names2Index[row[0]] = count
 		count += 1
+	line = f.readline()
 
 f.close()
 
@@ -65,9 +68,9 @@ print("List with names and indeces has been created")
 print("Creating links")
 
 f = open(inputFileName, 'rt')
-reader = csv.reader(f, delimiter='\t')
-for row in reader:
-#	print(row)
+line = f.readline()
+while line:
+	row = line.split()
 	pos1 = 0
 	pos2 = 0
 
@@ -76,6 +79,7 @@ for row in reader:
 	if row[1] in names2Index:
 		pos2 = names2Index[row[1]]
 	fn.write("{0} {1}:{2}\n".format(pos1,pos2,row[2]))
+	line = f.readline()
 
 fn.write("</hsp>\n")
 

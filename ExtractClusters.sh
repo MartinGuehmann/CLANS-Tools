@@ -12,5 +12,5 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 clansFile="$1"
 outFolder="$2"
 
-python $DIR/extractClusters.py $1 $2
+python $DIR/ExtractClusters.py $1 $2
 
